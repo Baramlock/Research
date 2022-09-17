@@ -5,28 +5,22 @@ namespace Scripts
     public class Person : MonoBehaviour
     {
         [SerializeField] private MovePersonSetting _movePersonSetting;
-        [SerializeField] private RotatorPerson.RotatorPersonSetting _rotatorPersonSetting;
+        [SerializeField] private Rotator.RotatorSetting _rotatorSetting;
         private InputKeyReader _inputKeyReader;
         private MoverPerson _moverPerson;
-        private RotatorPerson _rotatorPerson;
+        private Rotator _rotator;
 
         private Vector3 _directionPlaceParallel;
 
-        private void Awake()
-        {
-            InitMove();
-        }
+        private void Awake() => InitMove();
 
-        private void Update()
-        {
-            Move();
-        }
+        private void Update() => Move();
 
         private void InitMove()
         {
             _inputKeyReader = new InputKeyReader();
             _moverPerson = new MoverPerson(transform, _movePersonSetting);
-            _rotatorPerson = new RotatorPerson(transform, _rotatorPersonSetting);
+            _rotator = new Rotator(transform, _rotatorSetting);
         }
 
         private void Move()
@@ -37,7 +31,8 @@ namespace Scripts
                 return;
             Physics.Raycast(new Ray(transform.position, Vector3.down), out var hit);
             _directionPlaceParallel = _moverPerson.Move(direction, hit);
-            _rotatorPerson.SlerpRotate(Vector3.forward, _directionPlaceParallel, Time.deltaTime);
+            Debug.DrawRay(transform.position, _directionPlaceParallel * 100, Color.red);
+            _rotator.SlerpRotate(Vector3.forward, _directionPlaceParallel, Time.deltaTime);
         }
     }
 }
