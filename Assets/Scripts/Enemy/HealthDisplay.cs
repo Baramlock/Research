@@ -21,7 +21,7 @@ namespace Scripts
             _rotator = new Rotator(transform, _rotatorSetting);
         }
 
-        private void SetCurrentFill() => _image.fillAmount = _health.CurrentHealth / _health.MaxHealth;
+        private void SetCurrentFill() => _image.fillAmount = (float) _health.CurrentHealth / _health.MaxHealth;
 
         private void OnEnable() => _health.OnHealthChanged += SetCurrentFill;
 

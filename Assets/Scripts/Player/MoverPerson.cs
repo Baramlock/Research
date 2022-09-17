@@ -36,7 +36,6 @@ namespace Scripts
 
         public float ForwardSpeed => _forwardSpeed;
         public float LateralSpeed => _lateralSpeed;
-
         public float FullSpeed => _fullSpeed;
     }
 }
